@@ -1,0 +1,34 @@
+﻿@model SwimCalc
+@{
+    ViewData["Title"] = "Swim Calculator";
+}
+
+@using (Html.BeginForm("Calculate", "Home", FormMethod.Post))
+{
+    <div>
+        <div style="padding:10px">
+            <text class="instructions">Cut and paste your swim workout from TriDot to here.</text>
+        </div>
+        @Html.TextAreaFor(m => m.SwimWorkout, new { @class = "swiminput" })
+    </div>
+    <div>
+        <div style="padding:10px">
+            <table>
+                <tr>
+                    <td><text class="instructions">Cut and paste your zones from the Session Workload to here.</text></td>
+                    <td style="padding-left:25px; position:relative; top:0px;">
+                        @Html.CheckBoxFor(m => m.Metric, new { @class = "metricbox" })
+                        @Html.LabelFor(m => m.Metric, "25 meter pool", new { @class = "meterpool" })
+                    </td>
+                </tr>
+            </table>
+            
+        </div>
+            @Html.TextAreaFor(m => m.Zones, new { @class = "zoneinput" })
+        </div>
+        <div>
+            @Html.TextAreaFor(m => m.Calculated, new { @class = "swimoutput" })
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="margin-left:34px;">Calculate</button>
+        }
