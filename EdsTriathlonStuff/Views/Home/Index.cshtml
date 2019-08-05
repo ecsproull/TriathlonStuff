@@ -2,6 +2,19 @@
 @{
     ViewData["Title"] = "Swim Calculator";
 }
+<script type="text/javascript">
+    function printSwimWorkout() {
+        var headstr = "<html><head><title></title></head><body>";
+        var footstr = "</body>";
+        var newstr = document.all.item("swimout").innerHTML;
+        var oldstr = document.body.innerHTML;
+        document.body.innerHTML = headstr + newstr + footstr;
+        window.print();
+        document.body.innerHTML = oldstr;
+        return false;
+    }
+
+</script>
 
 @using (Html.BeginForm("Calculate", "Home", FormMethod.Post))
 {
@@ -26,9 +39,10 @@
         </div>
             @Html.TextAreaFor(m => m.Zones, new { @class = "zoneinput" })
         </div>
-        <div>
-            @Html.TextAreaFor(m => m.Calculated, new { @class = "swimoutput" })
+        <div id="swimout">
+            @Html.TextAreaFor(m => m.Calculated, new { @class = "swimoutput", @id="swimouttext" })
         </div>
 
         <button type="submit" class="btn btn-primary" style="margin-left:34px;">Calculate</button>
-        }
+        <button class="btn btn-primary" style="margin-left:34px;" onclick="printSwimWorkout()">Print</button>
+}

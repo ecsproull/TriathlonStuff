@@ -8,14 +8,14 @@ namespace EdsTriathlonStuff.App_Code
         static string inputData = string.Empty;
         static string regZones = @"\b[A-Za-z \]{3}[A-Za-z]*\b [0-9:]* - [0-9:]*";
         static string regTime = @"[0-9]{2}";
-        static string regWorkTimes = @"00:[0-9]{2}(?= 00:[0-9]{2})";
+        //static string regWorkTimes = @"00:[0-9]{2}(?= 00:[0-9]{2})";
 
         public static string FormatZones(string inputData, bool metric)
         {
             double multiplier = metric ? 1.09361 : 1;
             string output = string.Empty;
             MatchCollection zones = Regex.Matches(inputData, regZones);
-            MatchCollection workload = Regex.Matches(inputData, regWorkTimes);
+            //MatchCollection workload = Regex.Matches(inputData, regWorkTimes);
             for (int i = 0; i < 6; i++)
             {
                 string zoneValue = zones[i].Value;
@@ -51,9 +51,9 @@ namespace EdsTriathlonStuff.App_Code
                     string seconds1 = (time1Seconds < 10) ? "0" + time1Seconds.ToString() : time1Seconds.ToString();
                     string seconds2 = (time2Seconds < 10) ? "0" + time2Seconds.ToString() : time2Seconds.ToString();
 
-                    string length = metric ? " 100/m  Length Time: " : " 100/y  Length Time: ";
+                    string length = metric ? " 100/m  LT: " : " 100/y  LT: ";
 
-                    zoneValue = zoneName + " " + time1Minutes + ":" + seconds1 + " - " + time2Minutes + ":" + seconds2 + length + lengthTime.ToString("0.##") + " WorkTime: " + workload[i];
+                    zoneValue = zoneName + " " + time1Minutes + ":" + seconds1 + " - " + time2Minutes + ":" + seconds2 + length + lengthTime.ToString("0.##");
                     output += zoneValue + "\r\n";
                 }
             }
