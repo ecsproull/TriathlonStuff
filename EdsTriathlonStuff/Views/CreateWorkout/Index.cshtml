@@ -1,0 +1,245 @@
+﻿@model SwimCreate;
+
+
+@section scripts
+    {
+    <script src="@Url.Content("~/lib/jquery/dist/jquery.js")"></script>
+    <script type="text/javascript">
+        $(function () {
+            var poolLength = 25
+            var yards = true;
+
+            $(".poollengthinput").on("change", function (event) {
+                var parts = event.currentTarget.value.split(' ');
+                poolLength = parts[0];
+                yards = parts[1] == "Yards";
+
+                UpdateYardage(true);
+            });
+
+            function UpdateYardage(poolSizeChanged) {
+                var index = 0;
+                if (poolSizeChanged) {
+                    var lenId = "lens" + index;
+                    var lap = document.getElementById(lenId);
+                    do {
+                        if (lap.value != 0) {
+                            UpdateSet(index, lap.value);
+                        }
+                        lap = document.getElementById("lens" + ++index);
+                    }
+                    while (lap != null)
+                }
+
+                index = 0;
+                var total = 0;
+                var totId = "tot" + index;
+                var dist = document.getElementById(totId);
+                do {
+                    total += parseInt(dist.value, 10);
+                    totId = "tot" + ++index;
+                    dist = document.getElementById(totId);
+                }
+                while (dist != null)
+
+                if (yards) {
+                    document.getElementById("yardstotal").value = Math.round(total);
+                    document.getElementById("meterstotal").value = Math.round(0.9144 * total);
+                }
+                else {
+                    document.getElementById("meterstotal").value = Math.round(total);
+                    document.getElementById("yardstotal").value = Math.round(1.0936 * total);
+                }
+            }
+
+            function UpdateSet(i, val) {
+                var distId = "dist" + i;
+                var totId = "tot" + i;
+                var tot = val * poolLength;
+                document.getElementById(distId).value = Math.round(tot);
+
+                var repId = "reps" + i;
+                var reps = document.getElementById(repId).value;
+                var tot2 = reps * val * poolLength;
+                document.getElementById(totId).value = Math.round(tot2);
+            }
+
+            $('.repsentry').on("change", function (event) {
+                var val = event.currentTarget.value;
+                var i = event.currentTarget.getAttribute("data-index");
+                var lenId = "lens" + i;
+                var distId = "dist" + i;
+                var totId = "tot" + i;
+                var lengthCount = document.getElementById(lenId).value;
+                var tot = val * lengthCount * poolLength;
+                document.getElementById(totId).value = Math.round(tot);
+
+                UpdateYardage(false);
+            });
+
+            $('.lapsentry').on("change", function (event) {
+                var val = event.currentTarget.value;
+                var i = event.currentTarget.getAttribute("data-index");
+                UpdateSet(i, val);
+
+                UpdateYardage(false);
+            });
+        });
+
+        function printSwimWorkout() {
+            var headstr = "<html><head><title></title></head><body>";
+            var footstr = "</body>";
+            var newstr = document.all.item("swimout").innerHTML;
+            var oldstr = document.body.innerHTML;
+            document.body.innerHTML = headstr + newstr + footstr;
+            window.print();
+            document.body.innerHTML = oldstr;
+            return false;
+        }
+        //$(".repsentry").on("change", function (event) {
+        //    console.log("event object:");
+        //    console.dir(event);
+        //});
+    </script>
+}
+
+@using (Html.BeginForm("Calculate", "CreateWorkout", FormMethod.Post))
+{
+    <div>
+        <div style="margin-left:20px">
+            <div style="padding: 20px 0px 0px 10px;">
+                <text class="instructions">Pool Length</text>
+            </div>
+            <table>
+                <tr>
+                    <td>
+                        <div class="poolsizeborder">
+                            <table>
+                                <tr>
+                                    <td style="padding-right:10px;">
+                                        @Html.RadioButtonFor(m => m.PoolLength,
+                                                           "25 Yards",
+                                                           new { @class = "poollengthinput" })
+                                    </td>
+                                    <td style="padding-bottom:2px;">25 Yards</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-right:10px;">
+                                        @Html.RadioButtonFor(m => m.PoolLength,
+                                                           "25 Meters",
+                                                           new { @class = "poollengthinput" })
+                                    </td>
+                                    <td style="padding-bottom:2px;">25 Meters</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-right:10px;">
+                                        @Html.RadioButtonFor(m => m.PoolLength,
+                                                           "50 Meters",
+                                                           new { @class = "poollengthinput" })
+                                    </td>
+                                    <td style="padding-bottom:2px;">50 Meters</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-right:10px;">
+                                        @Html.RadioButtonFor(m => m.PoolLength,
+                                                           "33.33 Yards",
+                                                           new { @class = "poollengthinput" })
+                                    </td>
+                                    <td style="padding-bottom:2px;">33.33 Yards</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="workoutdescborder">
+                            <table>
+                                <tr>
+                                    <td class="medboldtext">
+                                        Workout Name
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.TextBoxFor(m => m.WorkoutName)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="medboldtext">
+                                        Description
+                                    </td>
+                                </tr>
+                                <tr>
+                                <tr>
+                                    <td>
+                                        @Html.TextAreaFor(m => m.WorkoutDescription, new
+                                        {
+                                            @class = "descbox",
+                                            @TextMode = "MultiLine",
+                                            @Columns = "50",
+                                            @Rows = "5"
+                                        })
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <div style="margin: 20px 0;">
+                <table>
+                    <tr>
+                        <td class="totalmeterslabel">Total Yards</td>
+                        <td class="numentry">
+                            @Html.TextBoxFor(m => m.TotalYards, new
+                            {
+                                @type = "number",
+                                @class = "readonlynumentry",
+                                @id = "yardstotal",
+                                @readonly = "true"
+                            })
+                        </td>
+                        <td class="totalmeterslabel">Total Meters</td>
+                        <td class="numentry">
+                            @Html.TextBoxFor(m => m.TotalMeters, new
+                            {
+                                @type = "number",
+                                @class = "readonlynumentry",
+                                @id = "meterstotal",
+                                @readonly = "true"
+                            })
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="font-weight:bold; font-size:25px; width:200px;">Warm Up</div>
+            <div style="width:800px">
+                @await Html.PartialAsync("_AddSets", new ViewDataDictionary(this.ViewData) { {"begin", Model.WarmUpBeginSteps  },
+                                                      { "end", Model.WarmUpEndSteps } })
+            </div>
+            <div style="font-weight:bold; font-size:25px; width:200px;">Main Set</div>
+            <div style="width:800px">
+                @await Html.PartialAsync("_AddSets", new ViewDataDictionary(this.ViewData) { {"begin", Model.MainBeginSteps  },
+                                                      { "end", Model.MainEndSteps } })
+            </div>
+            <div style="font-weight:bold; font-size:25px; width:200px;">Cooldown</div>
+            <div style="width:800px">
+                @await Html.PartialAsync("_AddSets", new ViewDataDictionary(this.ViewData) { {"begin", Model.CoolDownBeginSteps  },
+                                                              { "end", Model.CoolDownEndSteps } })
+            </div>
+        </div>
+    </div>
+
+    <div id="swimout">
+        @Html.TextAreaFor(m => m.Calculated, new { @class = "swimoutput", @id = "swimouttext" })
+    </div>
+    @Html.HiddenFor(m => m.WarmUpBeginSteps)
+    @Html.HiddenFor(m => m.WarmUpEndSteps)
+    @Html.HiddenFor(m => m.MainBeginSteps)
+    @Html.HiddenFor(m => m.MainEndSteps)
+    @Html.HiddenFor(m => m.CoolDownBeginSteps)
+    @Html.HiddenFor(m => m.CoolDownEndSteps)
+    <button type="submit" class="btn btn-primary" style="margin-left:20px;">Calculate</button>
+    <button class="btn btn-primary" style="margin-left:34px;" onclick="printSwimWorkout()">Print</button>
+}

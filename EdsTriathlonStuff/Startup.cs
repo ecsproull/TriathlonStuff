@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using EdsTriathlonStuff.App_Code;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -21,6 +19,9 @@ namespace EdsTriathlonStuff
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddDbContext<SwimDataContext>(options => options.UseSqlServer(Configuration["Data:ConnectionStrings:Identity"]));
+            services.AddDbContext<SwimDataContext>(options =>
+                options.UseSqlite(Configuration["Data:ConnectionStrings:DefaultConnection"]));
             services.AddMvc();
         }
 
@@ -43,8 +44,11 @@ namespace EdsTriathlonStuff
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=CreateWorkout}/{action=Index}/{id?}");
+
+                
             });
         }
     }
 }
+

@@ -44,6 +44,11 @@
     font-weight: bold;
 }
 
+.medboldtext {
+    font-size: medium;
+    font-weight: bold;
+}
+
 .meterpool {
     font-size: medium;
     font-weight: bold;
@@ -58,6 +63,85 @@
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] {
     width: 100%;
+}
+
+.poollengthinput {
+    height: 20px;
+    width: 20px;
+    padding-right: 5px;
+}
+
+.poolsizeborder {
+    border-width: 3px;
+    border-color: black;
+    border-style: solid;
+    padding: 5px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    width: 130px;
+}
+
+.workoutdescborder {
+    border-width: 3px;
+    border-color: black;
+    border-style: solid;
+    padding: 5px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
+
+.bold18 {
+    margin-right: 5px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.descbox {
+    width: 805px;
+    height: 45px;
+}
+
+.setnotes {
+    width: 500px;
+}
+
+.numentry {
+    width: 75px;
+}
+
+.readonlynumentry {
+    width: 75px;
+    background-color: lightgray;
+}
+
+.lapsentry {
+    width: 75px;
+}
+
+.repsentry {
+    width: 75px;
+}
+
+.settable{
+    margin-bottom: 25px;
+}
+
+.totalyardslabel {
+    width: 120px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.totalmeterslabel {
+    width: 135px;
+    padding-left: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.speedselect {
+    height: 23px;
 }
 
 /* QR code generator */
