@@ -1,6 +1,7 @@
 ﻿using EdsTriathlonStuff.App_Code;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,6 +23,14 @@ namespace EdsTriathlonStuff
             //services.AddDbContext<SwimDataContext>(options => options.UseSqlServer(Configuration["Data:ConnectionStrings:Identity"]));
             services.AddDbContext<SwimDataContext>(options =>
                 options.UseSqlite(Configuration["Data:ConnectionStrings:DefaultConnection"]));
+
+            services.AddDbContext<AppIdentityDbContext>(options =>
+                options.UseSqlite(Configuration["Data:ConnectionStrings:DefaultConnection"]));
+            services.AddIdentity<AppUser, IdentityRole>(config =>
+            {
+                //config.SignIn.RequireConfirmedEmail = true;
+            }).AddEntityFrameworkStores<AppIdentityDbContext>().AddDefaultTokenProviders();
+
             services.AddMvc();
         }
 
@@ -39,7 +48,7 @@ namespace EdsTriathlonStuff
             }
 
             app.UseStaticFiles();
-
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

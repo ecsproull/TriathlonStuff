@@ -1,4 +1,5 @@
-﻿body {
+body {
+    margin-top: 25px;
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -21,13 +22,16 @@
     width: 100%;
     padding-left: 15px;
     padding-right: 15px;
+    margin-left: 20px
 }
 
 .swimoutput {
     height: 600px;
-    width: 100%;
+    width: 970px;
     padding-left: 15px;
     padding-right: 15px;
+    margin-left: 20px;
+    font-size: 18px;
 }
 
 .zoneinput {
@@ -81,6 +85,17 @@
     width: 130px;
 }
 
+.workoutsborder {
+    border-width: 3px;
+    border-color: black;
+    border-style: solid;
+    padding: 5px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    width: 175px;
+    height: 1580px;
+}
+
 .workoutdescborder {
     border-width: 3px;
     border-color: black;
@@ -103,7 +118,7 @@
 }
 
 .setnotes {
-    width: 500px;
+    width: 600px;
 }
 
 .numentry {
@@ -142,6 +157,117 @@
 
 .speedselect {
     height: 23px;
+}
+
+.distselect  {
+    height: 23px;
+}
+
+.addvalue {
+    height:23px
+}
+
+.loggedin-button {
+    background-image: url('/Icon/unlock-24.png');
+    background-repeat: no-repeat;
+    background-size: auto;
+    height: 24px;
+    width: 24px;
+    display: block;
+    float: right;
+    margin-right: 10px;
+    border: none;
+    background-color: white;
+}
+
+.loggedout-button {
+    background-image: url('/Icon/lock-24.png');
+    background-repeat: no-repeat;
+    background-size: auto;
+    height: 24px;
+    width: 24px;
+    display: block;
+    float: right;
+    margin-right: 10px;
+    border: none;
+    background-color: white;
+}
+
+
+.userName {
+    margin-top: 10px;
+}
+
+.userTable {
+    font-size: 18px;
+    text-align: center;
+    padding: 12px 0 0 0;
+    width: 100%;
+}
+
+    .userTable td, .userTable tr, roleTable td, .roleTable tr {
+        padding: 8px;
+    }
+
+        .userTable td input {
+            margin-left: 0px;
+            float: left;
+            display: block;
+            height: 20px;
+        }
+
+    .userTable tbody th:first-child {
+        border-radius: 16px 0 0 0;
+    }
+
+    .userTable tbody th {
+        text-align: center;
+    }
+
+        .userTable tbody th:last-child {
+            border-radius: 0 16px 0 0;
+            padding: 10px 10px;
+        }
+
+    .userTable tbody tr:last-child {
+        border-radius: 0 0 16px 0;
+    }
+
+        .userTable tbody tr:last-child td:first-child {
+            border-radius: 0 0 0 16px;
+        }
+
+        .userTable tbody tr:last-child td:last-child {
+            border-radius: 0 0 16px 0;
+        }
+
+    .userTable tbody tr:nth-child(even), .roleTable tbody tr:nth-child(even) {
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#999));
+    }
+
+    .userTable tbody tr:nth-child(odd), .roleTable tbody tr:nth-child(odd) {
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#bbb), to(#fff));
+    }
+
+.roleTable tbody tr:only-child td:first-child {
+    border-radius: 10px 0 0 10px;
+    padding: 10px;
+}
+
+.roleTable tbody tr:only-child td:last-child {
+    border-radius: 0 10px 10px 0;
+}
+
+.userTable tbody th:only-child {
+    border-radius: 0 0 0 0;
+}
+
+.userTable tbody tr:only-child td:only-child {
+    border-radius: 0 0 0 0;
+}
+
+.userTable tbody tr:hover {
+    background-color: #ddd;
 }
 
 /* QR code generator */

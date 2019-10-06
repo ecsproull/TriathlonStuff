@@ -1,0 +1,23 @@
+﻿@model EditUserViewModel
+
+@using (Html.BeginForm("Edit", "Admin", FormMethod.Post))
+{
+    <table class="label-text-table">
+        <tr>
+            <td>@Html.LabelFor(m => m.User.Id, new { @style = "margin-left:55px;" })</td>
+            <td><p class="text-box-wide" style="text-align:left; padding-left:5px;">@Model.User.Id</p></td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.User.Email, new { @style = "margin-left:30px;" })</td>
+            <td> @Html.TextBoxFor(m => m.User.Email, null, new { @class = "text-box-wide" })</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.Password)</td>
+            <td>@Html.TextBoxFor(m => m.Password, null, new { @class = "text-box-wide" })</td>
+        </tr>
+    </table>
+    @Html.HiddenFor(m => m.LoginButtonClass)
+    @Html.HiddenFor(m => m.User.Id)
+    <button type="submit" class="btn btn-primary" style="margin-left:34px;">Update User</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+}
