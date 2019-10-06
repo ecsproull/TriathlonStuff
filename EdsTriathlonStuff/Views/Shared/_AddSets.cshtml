@@ -4,10 +4,9 @@
     <table>
         <tr>
             <td class="bold18">Repeat</td>
-            <td class="bold18">Lengths</td>
+            <td class="bold18">Dist</td>
             <td class="bold18">Rest</td>
             <td class="bold18">Speed</td>
-            <td class="bold18">Dist</td>
             <td class="bold18">Tot</td>
             <td class="bold18">Notes</td>
         </tr>
@@ -16,62 +15,59 @@
         <tr>
             <td>
                 @Html.TextBoxFor(m => m.SwimSets[i].RepCount,
-                                                                         new
-                                                                         {
-                                                                             @type = "number",
-                                                                             @min = 0,
-                                                                             @class = "repsentry",
-                                                                             @id = "reps" + i,
-                                                                             @data_index = i
-                                                                         })
+                                  new
+                                  {
+                                      @type = "number",
+                                      @min = 0,
+                                      @class = "repsentry",
+                                      @id = "reps" + i,
+                                      @data_index = i
+                                  })
             </td>
             <td>
-                @Html.TextBoxFor(m => m.SwimSets[i].LengthCount,
-                                                                        new
-                                                                        {
-                                                                            @type = "number",
-                                                                            @min = 0,
-                                                                            @class = "lapsentry",
-                                                                            @data_index = i,
-                                                                            @id = "lens" + i
-                                                                        })
+                @Html.DropDownListFor(m => m.SwimSets[i].Distance, 
+                                      Model.SetDistanceSelectList, 
+                                      new
+                                        {
+                                            @class = "distselect",
+                                            @id = "dist" + i,
+                                            @data_index = i
+                                        })
+                @{
+                    var divId = "div_content" + i;
+                    var newOptionTxt = "newOptionTxt" + i;
+                    <div id="@divId" style="display:none" data_index=@i>
+                        <input id="@newOptionTxt" type="text" />
+                        <input class="addvalue" type="button" value="AddNewItem" data_index=@i />
+                    </div>
+                }
             </td>
             <td>
                 @Html.TextBoxFor(m => m.SwimSets[i].Rest,
-                                                                        new
-                                                                        {
-                                                                            @type = "number",
-                                                                            @min = 0,
-                                                                            @class = "numentry",
-                                                                            @data_index = i
-                                                                        })
+                                 new
+                                 {
+                                     @type = "number",
+                                     @min = 0,
+                                     @class = "numentry",
+                                     @data_index = i
+                                 })
             </td>
             <td>
                 @Html.DropDownListFor(m => m.SwimSets[i].Speed, Model.SwimSpeedSelectList, new { @class = "speedselect" })
             </td>
             <td>
-                @Html.TextBoxFor(m => m.SwimSets[i].Distance,
-                                                                        new
-                                                                        {
-                                                                            @type = "number",
-                                                                            @class = "readonlynumentry",
-                                                                            @id = "dist" + i,
-                                                                            @readonly = "true"
-                                                                        })
-            </td>
-            <td>
                 @Html.TextBoxFor(m => m.SwimSets[i].Total,
-                                                                        new
-                                                                        {
-                                                                            @type = "number",
-                                                                            @class = "readonlynumentry",
-                                                                            @id = "tot" + i,
-                                                                            @readonly = "true"
-                                                                        })
+                                 new
+                                 {
+                                     @type = "number",
+                                     @class = "readonlynumentry",
+                                     @id = "tot" + i,
+                                     @readonly = "true"
+                                 })
             </td>
             <td>
                 @Html.TextBoxFor(m => m.SwimSets[i].Comment,
-                                                                        new { @class = "setnotes" })
+                                 new { @class = "setnotes" })
             </td>
             @Html.HiddenFor(m => m.SwimSets[i].Id)
         </tr>

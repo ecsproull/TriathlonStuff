@@ -1,0 +1,77 @@
+﻿@model UsersViewModel
+@using EdsTriathlonStuff.App_Code
+<div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+<table class="userTable">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th></th>
+    </tr>
+
+    @if (Model.AppUsers.Count() == 0)
+    {
+        <tr>
+            <td colspan="3" class="text-center">No User Accounts</td>
+        </tr>
+    }
+    else
+    {
+        @foreach (AppUser vm in Model.AppUsers)
+        {
+            <tr>
+                <td>@vm.Id</td>
+                <td>@vm.UserName</td>
+                <td>@vm.Email</td>
+                <td>
+                    <form asp-action="DeleteUser" asp-route-id="@vm.Id" method="post">
+                        <a class="btn btn-sm btn-primary" asp-action="Edit"  asp-route-id="@vm.Id">Edit</a>
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    }
+</table>
+
+<a class="btn-create-user" asp-action="CreateUser">Create User</a>
+
+<hr style="height:10px; background-color:#888"  />
+<h3>Roles</h3>
+
+<div class="text-danger" asp-validation-summary="ModelOnly">
+</div>
+<table class="userTable">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Users</th>
+        <th></th>
+    </tr>
+    @if (Model.Roles.Count() == 0)
+    {
+        <tr>
+            <td colspan="4" class="text-center">No Roles</td>
+        </tr>
+    }
+    else
+    {
+        foreach (var role in Model.Roles)
+        {
+            <tr>
+                <td>@role.Id </td>
+                <td>@role.Name </td>
+                <td identity-role="@role.Id"></td>
+                <td>
+                    <form asp-action="DeleteRole" asp-route-id="@role.Id" method="post">
+                        <a class="btn btn-sm btn-primary" asp-action="EditRole" asp-route-id="@role.Id">Edit</a>
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    }
+</table>
+
+<a class="btn-create-user" asp-action="CreateRole">Create Role</a>

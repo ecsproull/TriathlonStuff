@@ -1,0 +1,10 @@
+﻿@model ErrorCreatingUserViewModel
+
+<div class="bordered" style="padding:20px;">
+    @foreach (string error in Model.ErrorDescriptions)
+    {
+        <div>
+            <p style="color:red; font-weight:bold;">@error</p>
+        </div>
+    }
+</div>

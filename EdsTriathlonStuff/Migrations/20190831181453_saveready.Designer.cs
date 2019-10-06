@@ -11,9 +11,10 @@ using System;
 namespace EdsTriathlonStuff.Migrations
 {
     [DbContext(typeof(SwimDataContext))]
-    partial class SwimDataContextModelSnapshot : ModelSnapshot
+    [Migration("20190831181453_saveready")]
+    partial class saveready
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
