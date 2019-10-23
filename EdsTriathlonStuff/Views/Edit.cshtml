@@ -16,7 +16,6 @@
             <td>@Html.TextBoxFor(m => m.Password, null, new { @class = "text-box-wide" })</td>
         </tr>
     </table>
-    @Html.HiddenFor(m => m.LoginButtonClass)
     @Html.HiddenFor(m => m.User.Id)
     <button type="submit" class="btn btn-primary" style="margin-left:34px;">Update User</button>
     <a asp-action="Index" class="btn btn-secondary">Cancel</a>

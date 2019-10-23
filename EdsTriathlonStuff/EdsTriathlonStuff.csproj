@@ -30,4 +30,9 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\appScriptsJS\SwimWorkout.js" />
+    <None Include="wwwroot\appScriptsJS\SwimWorkout.js.map" />
+  </ItemGroup>
+
 </Project>

@@ -270,6 +270,13 @@ body {
     background-color: #ddd;
 }
 
+.ui-widget-header, .ui-state-default, ui-button {
+    background: #2e65a8;
+    border: 1px solid #b9cd6d;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
 /* QR code generator */
 #qrCode {
     margin: 15px;
